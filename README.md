@@ -10,10 +10,11 @@
 `{"unix": <date.getTime()>, "utc" : <date.toUTCString()> }`
 e.g. `{"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}`.
 5. If the date string is **invalid** the api returns a JSON having the structure `{"unix": null, "utc" : "Invalid Date" }`. It is what you get from the date manipulation functions used above.
+- Although 5. seems pretty straightforward (to me at least), the fcc test will not pass the above JSON structure, instead it will take { error: "Invalid Date"}. Don't ask me why. :D
 
 #### Example usage:
-* https://curse-arrow.hyperdev.space/api/timestamp/2015-12-15
-* https://curse-arrow.hyperdev.space/api/timestamp/1450137600000
+* https://fcc-timestamp-microservice-v2/api/timestamp/2015-12-15
+* https://fcc-timestamp-microservice-v2/api/timestamp/1450137600000
 
 #### Example output:
 * { "unix": 1450137600, "natural": "December 15, 2015" }
