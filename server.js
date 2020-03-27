@@ -23,11 +23,11 @@ app.get("/api/hello", function(req, res) {
   res.json({ greeting: "hello API" });
 });
 
-app.get("/timestamp", (req, res) => {
+app.get("api/timestamp", (req, res) => {
   res.send(new Date());
 });
 
-app.get("/timestamp/:date_string", (req, res) => {
+app.get("api/timestamp/:date_string", (req, res) => {
   console.log(req.params.date_string);
   const date = new Date(req.params.date_string);
   console.log(date);
