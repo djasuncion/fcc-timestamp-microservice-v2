@@ -23,20 +23,37 @@ app.get("/api/hello", function(req, res) {
   res.json({ greeting: "hello API" });
 });
 
-app.get("/timestamp", (req, res) => {
-  res.send(new Date());
+app.get("/api/timestamp", (req, res) => {
+  const unix = new Date().getTime();
+  const utc = new Date().toUTCString();
+  res.json({
+    unix,
+    utc
+  });
 });
 
-app.get("/timestamp/:date_string", (req, res) => {
-  console.log(req.params.date_string);
-  const date = new Date(req.params.date_string);
-  console.log(date);
+app.get("/api/timestamp/:date_string", (req, res) => {
+  const data = req.params.date_string;
+  const date = new Date(data);
+  const isUnix = /\d{5,}/.test(req.params.date_string) ? true : false;
+  const isValid = date.toString() === "Invalid Date" ? false : true;
 
-  if (date) {
+  if (isUnix) {
+    const unixDate = parseInt(data);
+
+    res.json({
+      unix: unixDate,
+      utc: new Date(unixDate).toUTCString()
+    });
+  } else if (isValid) {
     res.json({
       unix: date.getTime(),
       utc: date.toUTCString()
     });
+  } else {
+    res.json({
+      error: 'Invalid Date'
+    })
   }
 });
 
